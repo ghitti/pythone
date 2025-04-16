@@ -9,4 +9,3 @@ def crivello(n):
     return l
 
 print(crivello(100))
-
