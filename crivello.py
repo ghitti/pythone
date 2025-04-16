@@ -1,4 +1,3 @@
-# Algoritmo per trovare i numeri primi fino a n
 # Funzione che restituisce una lista di numeri primi fino a n
 def crivello(n):
     l = list(range(2, n + 1))
