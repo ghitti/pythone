@@ -18,24 +18,44 @@ def discount(prices, isPet, nItems):
 
 def main():
     print("Programma per calcolo sconto negozio animali")
-    print("Inserisci i prezzi degli articoli seguiti da Y se animale, N se altro articolo")
+    print("Inserisci il prezzo seguito da Y se animale, N se altro")
     print("Inserisci -1 per terminare l'input")
     
     prices = []
     isPet = []
     
     while True:
-        price_input = input("Inserisci il prezzo (o -1 per terminare): ")
-        price = float(price_input)
+        # Utilizzo di split() per separare il prezzo e l'indicazione Y/N
+        user_input = input("Inserisci prezzo e Y/N per indicare se animale (o -1 per terminare): ")
         
-        if price == -1:
+        # Controllo se l'utente ha inserito il valore sentinella
+        if user_input == "-1":
             break
             
-        pet_input = input("È un animale? (Y/N): ").upper()
-        is_pet = (pet_input == 'Y')
+        # Divide l'input in due parti: prezzo e tipo
+        parts = user_input.split()
         
-        prices.append(price)
-        isPet.append(is_pet)
+        # Verifica che l'input sia nel formato corretto
+        if len(parts) != 2:
+            print("Formato non valido. Usa: prezzo Y/N (es: 25.50 N)")
+            continue
+            
+        try:
+            price = float(parts[0])
+            pet_input = parts[1].upper()
+            
+            # Verifica che il tipo sia Y o N
+            if pet_input not in ['Y', 'N']:
+                print("Il tipo deve essere Y o N")
+                continue
+                
+            is_pet = (pet_input == 'Y')
+            
+            prices.append(price)
+            isPet.append(is_pet)
+            
+        except ValueError:
+            print("Prezzo non valido. Inserisci un numero seguito da Y/N")
     
     nItems = len(prices)
     
