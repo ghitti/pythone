@@ -21,13 +21,13 @@ for tr in table.contents[2:-2]:
         sigla = tds[7].get_text()
         lista.append([sigla, provincia, residenti, superficie, densita_ufficiale])
 
-df =  pd.DataFrame(lista, columns=["Targa", "Provincia", "Residenti", "Superficie", "Densita_Ufficiale"])
+df =  pd.DataFrame(lista, columns=["Sigla", "Provincia", "Abitanti", "Superficie", "Densita_Ufficiale"])
 
-df["Densità_Calcolata"] = (df["Residenti"] / df["Superficie"]).round(1)
+df["Densità_Calcolata"] = (df["Abitanti"] / df["Superficie"]).round(1)
 df["Esito"] = df["Densità_Calcolata"] == df["Densita_Ufficiale"]
 df["Esito"] = df["Esito"].map({True: "--", False: "differenza"})
 
-df = df.sort_values(["Targa", "Provincia", "Residenti", "Densita_Ufficiale"])
+df = df.sort_values(["Sigla", "Provincia", "Abitanti", "Densita_Ufficiale"])
 
 print(df.drop(columns=["Superficie"]).to_string(index=False))
 
